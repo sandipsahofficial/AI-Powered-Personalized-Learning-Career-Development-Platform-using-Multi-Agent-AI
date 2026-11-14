@@ -1,0 +1,10 @@
+FROM postgres:16-alpine
+
+RUN apk add --no-cache --virtual .build-deps build-base git \
+  && git clone --depth 1 --branch v0.6.2 https://github.com/pgvector/pgvector.git \
+  && cd pgvector \
+  && make OPTFLAGS="" \
+  && make install \
+  && cd .. \
+  && rm -rf pgvector \
+  && apk del .build-deps

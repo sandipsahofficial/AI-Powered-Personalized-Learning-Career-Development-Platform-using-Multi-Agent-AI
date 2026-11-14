@@ -1,0 +1,115 @@
+from app.models.base import Base, UUIDMixin, TimestampMixin
+from app.models.user import (
+    UserRoleEnum,
+    Organization,
+    OrganizationMembership,
+    User,
+    UserProfile,
+    UserPreference,
+    UserSession,
+    RefreshToken
+)
+from app.models.skill import (
+    SkillCategory,
+    Skill,
+    SkillPrerequisite,
+    UserSkill,
+    SkillAssessment,
+    SkillAssessmentResult,
+    SkillVerificationRecord
+)
+from app.models.career import (
+    CareerCategory,
+    CareerRole,
+    CareerSkillRequirement,
+    CareerBenchmark,
+    UserCareerGoal,
+    CareerMatchingResult
+)
+from app.models.learning import (
+    ResourceCategory,
+    LearningResource,
+    LearningRoadmap,
+    RoadmapMilestone,
+    MilestoneResource,
+    LearningActivity,
+    LearningProgress,
+    CourseCompletionRecord,
+    LearningHistory
+)
+from app.models.assessment import (
+    Assessment,
+    AssessmentQuestion,
+    AssessmentOption,
+    AssessmentAttempt,
+    AssessmentAnswer,
+    AssessmentResult
+)
+from app.models.ai import (
+    AgentExecutionHistory,
+    AgentExecutionLog,
+    AIRecommendation,
+    RecommendationHistory,
+    AdaptiveReplanningEvent,
+    AIMentorConversation
+)
+from app.models.gamification import (
+    UserGamification,
+    PointsHistory,
+    AchievementRecord,
+    Notification,
+    UserActivityLog
+)
+
+__all__ = [
+    "Base",
+    "UUIDMixin",
+    "TimestampMixin",
+    "UserRoleEnum",
+    "Organization",
+    "OrganizationMembership",
+    "User",
+    "UserProfile",
+    "UserPreference",
+    "UserSession",
+    "RefreshToken",
+    "SkillCategory",
+    "Skill",
+    "SkillPrerequisite",
+    "UserSkill",
+    "SkillAssessment",
+    "SkillAssessmentResult",
+    "SkillVerificationRecord",
+    "CareerCategory",
+    "CareerRole",
+    "CareerSkillRequirement",
+    "CareerBenchmark",
+    "UserCareerGoal",
+    "CareerMatchingResult",
+    "ResourceCategory",
+    "LearningResource",
+    "LearningRoadmap",
+    "RoadmapMilestone",
+    "MilestoneResource",
+    "LearningActivity",
+    "LearningProgress",
+    "CourseCompletionRecord",
+    "LearningHistory",
+    "Assessment",
+    "AssessmentQuestion",
+    "AssessmentOption",
+    "AssessmentAttempt",
+    "AssessmentAnswer",
+    "AssessmentResult",
+    "AgentExecutionHistory",
+    "AgentExecutionLog",
+    "AIRecommendation",
+    "RecommendationHistory",
+    "AdaptiveReplanningEvent",
+    "AIMentorConversation",
+    "UserGamification",
+    "PointsHistory",
+    "AchievementRecord",
+    "Notification",
+    "UserActivityLog"
+]
