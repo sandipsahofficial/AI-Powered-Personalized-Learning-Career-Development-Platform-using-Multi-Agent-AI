@@ -22,6 +22,18 @@ async def lifespan(app: FastAPI):
     logger.info(f"Connecting to database at {settings.POSTGRES_SERVER}:{settings.POSTGRES_PORT}/{settings.POSTGRES_DB}")
     logger.info(f"Configured Ollama endpoint at {settings.OLLAMA_BASE_URL}")
 
+    # Ensure pgvector extension and database schema for fresh cloud deployment
+    try:
+        from app.db.session import engine
+        from app.models import Base
+        from sqlalchemy import text
+        async with engine.begin() as conn:
+            await conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector;"))
+            await conn.run_sync(Base.metadata.create_all)
+            logger.info("Cloud database tables and pgvector extension verified.")
+    except Exception as e:
+        logger.warning(f"Database schema initialization notice: {e}")
+
     # Seed canonical taxonomy and resources on startup
     try:
         from app.db.session import AsyncSessionLocal
@@ -49,11 +61,12 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# Configure CORS
+# Configure CORS safely for both cloud wildcards and specific domains
+is_wildcard = "*" in settings.CORS_ORIGINS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.CORS_ORIGINS,
-    allow_credentials=True,
+    allow_credentials=not is_wildcard,
     allow_methods=["*"],
     allow_headers=["*"],
 )
